@@ -1,0 +1,20 @@
+CREATE TABLE `subscriptions` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int(10) unsigned NOT NULL,
+  `environment` varchar(255) NOT NULL DEFAULT '',
+  `orig_tx_id` varchar(255) NOT NULL DEFAULT '',
+  `latest_receipt` text NOT NULL,
+  `start_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `end_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `app` varchar(255) NOT NULL DEFAULT '',
+  `product_id` varchar(255) NOT NULL DEFAULT '',
+  `is_cancelled` tinyint(1) NOT NULL,
+  `validation_response` text NOT NULL,
+  `fake` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `orig_transaction_id` (`orig_tx_id`),
+  KEY `user_id` (`user_id`),
+  KEY `start_date` (`start_date`),
+  KEY `end_date` (`end_date`),
+  CONSTRAINT `subscriptions_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=350 DEFAULT CHARSET=utf8mb4;
